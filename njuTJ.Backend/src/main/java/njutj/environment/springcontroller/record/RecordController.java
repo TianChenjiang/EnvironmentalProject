@@ -1,23 +1,19 @@
 package njutj.environment.springcontroller.record;
 
+import njutj.environment.blservice.account.UserBlService;
 import njutj.environment.blservice.upload.ImageUploadBlService;
+import njutj.environment.publicdatas.record.RecordState;
 import njutj.environment.response.Response;
-import njutj.environment.vo.record.RecordCreateVo;
+import njutj.environment.response.SuccessResponse;
+import njutj.environment.response.account.ExpertCheckResponse;
+import njutj.environment.response.record.RecordSaveResponse;
 import njutj.environment.vo.record.SpeciesCheckVo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class RecordController {
-    private final ImageUploadBlService imageUploadBlService;
-
-    @Autowired
-    public RecordController(ImageUploadBlService imageUploadBlService) {
-        this.imageUploadBlService = imageUploadBlService;
-    }
+    private final RecordBlService recordBlService;
 
     @RequestMapping(method = RequestMethod.POST, path = "record/waitForCheck", produces = "application/json")
     @ResponseBody
@@ -25,21 +21,20 @@ public class RecordController {
         return null;
     }
 
+
     @RequestMapping(method = RequestMethod.POST, path = "record/check", produces = "application/json")
     @ResponseBody
     public ResponseEntity<Response> check(@RequestBody SpeciesCheckVo speciesCheckVo) {
-        return null;
+
+        recordBlService.check(speciesCheckVo);
+        recordBlService.saveRecord(SpeciesCheckVo);
+        return new ResponseEntity<>(new RecordSaveResponse("save success"), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "record/uploadImage", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<Response> uploadImage(@RequestParam("foodImage") MultipartFile multipartFile) {
-        return new ResponseEntity<>(imageUploadBlService.uploadImage(multipartFile), HttpStatus.CREATED);
-    }
 
-    @RequestMapping(method = RequestMethod.POST, path = "record/createRecord", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "record/check", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<Response> createRecord(@RequestBody RecordCreateVo recordCreateVo) {
+    public ResponseEntity<Response> check(@RequestBody SpeciesCheckVo speciesCheckVo) {
         return null;
     }
 }

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evironment.iml" filepath="$PROJECT_DIR$/.idea/modules/evironment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evironment_main.iml" filepath="$PROJECT_DIR$/.idea/modules/evironment_main.iml" group="evironment" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/evironment_test.iml" filepath="$PROJECT_DIR$/.idea/modules/evironment_test.iml" group="evironment" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/njuTJ.Backend.iml" filepath="$PROJECT_DIR$/.idea/modules/njuTJ.Backend.iml" />
     </modules>
   </component>
 </project>

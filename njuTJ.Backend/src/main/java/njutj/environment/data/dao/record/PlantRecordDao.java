@@ -1,4 +1,5 @@
 package njutj.environment.data.dao.record;
 
-public interface PlantRecordDao {
+public interface PlantDao extends JpaRepository<Record, Integer> {
+
 }

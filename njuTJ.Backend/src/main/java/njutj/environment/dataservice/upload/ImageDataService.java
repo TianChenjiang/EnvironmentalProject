@@ -1,12 +1,22 @@
 package njutj.environment.dataservice.upload;
 
-import njutj.environment.entity.record.Image;
+import njutj.environment.exception.viewexception.SystemException;
+import trapx00.tagx00.exception.viewexception.SystemException;
 
 public interface ImageDataService {
     /**
-     * save image
+     * upload the image to the oos cloud
      *
-     * @param image the image to de saved
+     * @param key   the id of the image
+     * @param bytes the image content
+     * @return the url of the uploaded image
      */
-    Image saveImage(Image image);
+    String uploadImage(String key, byte[] bytes) throws SystemException, SystemException;
+
+    /**
+     * delete the image
+     *
+     * @param key the id of the image
+     */
+    void deleteImage(String key);
 }
