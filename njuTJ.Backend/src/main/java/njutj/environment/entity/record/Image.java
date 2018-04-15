@@ -7,7 +7,6 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     @Column(name = "url")
     private String url;
 

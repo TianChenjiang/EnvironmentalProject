@@ -11,12 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public class ImageUploadBlSeriviceImpl implements ImageUploadBlService {
+public class ImageUploadBlServiceImpl implements ImageUploadBlService {
     private final ImageDataService imageDataService;
     private final ImageUploadDataService imageUploadDataService;
 
     @Autowired
-    public ImageUploadBlSeriviceImpl(ImageDataService imageDataService, ImageUploadDataService imageUploadDataService) {
+    public ImageUploadBlServiceImpl(ImageDataService imageDataService, ImageUploadDataService imageUploadDataService) {
         this.imageDataService = imageDataService;
         this.imageUploadDataService = imageUploadDataService;
     }
@@ -28,11 +28,15 @@ public class ImageUploadBlSeriviceImpl implements ImageUploadBlService {
      * @return the upload image response
      */
     @Override
-    public UploadImageResponse uploadImage(MultipartFile multipartFile) throws IOException, SystemException {
+    public UploadImageResponse uploadImage(MultipartFile multipartFile) throws SystemException, IOException {
         Image image = imageDataService.saveImage(new Image(""));
-        String url = imageUploadDataService.uploadImage(image.getId() + "", multipartFile.getBytes());
-        image.setUrl(url);
-        imageDataService.saveImage(image);
-        return new UploadImageResponse(url);
+        if (image != null) {
+            String url = imageUploadDataService.uploadImage(String.valueOf(image.getId()), multipartFile.getBytes());
+            image.setUrl(url);
+            imageDataService.saveImage(image);
+            return new UploadImageResponse(url);
+        } else {
+            throw new SystemException();
+        }
     }
 }

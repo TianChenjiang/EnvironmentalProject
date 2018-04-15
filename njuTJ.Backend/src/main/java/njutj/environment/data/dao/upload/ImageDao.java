@@ -1,4 +1,4 @@
-package njutj.environment.data.dao.record;
+package njutj.environment.data.dao.upload;
 
 import njutj.environment.entity.record.Image;
 import org.springframework.data.jpa.repository.JpaRepository;

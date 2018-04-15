@@ -10,7 +10,7 @@ public interface ImageUploadDataService {
      * @param bytes the image content
      * @return the url of the uploaded image
      */
-    String uploadImage(String key, byte[] bytes) throws SystemException, SystemException;
+    String uploadImage(String key, byte[] bytes) throws SystemException;
 
     /**
      * delete the image
