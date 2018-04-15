@@ -1,6 +1,9 @@
 package njutj.environment.dataservice.record;
 
 import njutj.environment.entity.record.PlantRecord;
+import njutj.environment.publicdatas.record.RecordState;
+
+import java.util.List;
 
 public interface RecordDataService {
     /**
@@ -18,4 +21,12 @@ public interface RecordDataService {
      * @return the plant record object
      */
     PlantRecord getRecordByRecordId(long recordId);
+
+    /**
+     * get records by their record state
+     *
+     * @param recordState the state of record
+     * @return the list of records
+     */
+    List<PlantRecord> getRecordsByRecordState(RecordState recordState);
 }

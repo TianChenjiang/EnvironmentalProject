@@ -3,7 +3,10 @@ package njutj.environment.data.record;
 import njutj.environment.data.dao.record.PlantRecordDao;
 import njutj.environment.dataservice.record.RecordDataService;
 import njutj.environment.entity.record.PlantRecord;
+import njutj.environment.publicdatas.record.RecordState;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class RecordDataServiceImpl implements RecordDataService {
     private final PlantRecordDao plantRecordDao;
@@ -33,5 +36,16 @@ public class RecordDataServiceImpl implements RecordDataService {
     @Override
     public PlantRecord getRecordByRecordId(long recordId) {
         return plantRecordDao.findPlantRecordById(recordId);
+    }
+
+    /**
+     * get records by their record state
+     *
+     * @param recordState the state of record
+     * @return the list of records
+     */
+    @Override
+    public List<PlantRecord> getRecordsByRecordState(RecordState recordState) {
+        return plantRecordDao.findPlantRecordsByRecordState(recordState);
     }
 }

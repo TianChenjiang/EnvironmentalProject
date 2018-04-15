@@ -24,6 +24,12 @@ public class RecordController {
         this.recordBlService = recordBlService;
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "record/waitForCheck", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<Response> loadWaitForCheck() {
+        return new ResponseEntity<>(recordBlService.loadWaitForCheck(), HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST, path = "record/check", produces = "application/json")
     @ResponseBody
     public ResponseEntity<Response> check(@RequestBody SpeciesCheckVo speciesCheckVo) {
