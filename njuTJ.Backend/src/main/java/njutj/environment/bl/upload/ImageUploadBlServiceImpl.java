@@ -32,7 +32,7 @@ public class ImageUploadBlServiceImpl implements ImageUploadBlService {
      */
     @Override
     public UploadImageResponse uploadImage(MultipartFile multipartFile) throws SystemException {
-        PlantRecord plantRecord = recordDataService.saveRecord(new PlantRecord(RecordState.PENDING, "", null));
+        PlantRecord plantRecord = recordDataService.saveRecord(new PlantRecord(RecordState.PENDING, "", 0, 0, null));
         String url;
         try {
             url = imageUploadDataService.uploadImage(String.valueOf(plantRecord.getId()), multipartFile.getBytes());
@@ -41,6 +41,6 @@ public class ImageUploadBlServiceImpl implements ImageUploadBlService {
         }
         plantRecord.setImageUrl(url);
         recordDataService.saveRecord(plantRecord);
-        return new UploadImageResponse(url);
+        return new UploadImageResponse(plantRecord.getId(), url);
     }
 }

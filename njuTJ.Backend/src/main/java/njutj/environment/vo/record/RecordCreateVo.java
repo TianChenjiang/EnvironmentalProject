@@ -1,19 +1,35 @@
 package njutj.environment.vo.record;
 
-import njutj.environment.publicdatas.record.Position;
-
 public class RecordCreateVo {
     private long recordId;
     private String name;
-    private Position position;
+    private double lng;
+    private double lat;
 
     public RecordCreateVo() {
     }
 
-    public RecordCreateVo(long recordId, String name, Position position) {
+    public RecordCreateVo(long recordId, String name, double lng, double lat) {
         this.recordId = recordId;
         this.name = name;
-        this.position = position;
+        this.lng = lng;
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
     public long getRecordId() {
@@ -32,11 +48,4 @@ public class RecordCreateVo {
         this.name = name;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 }

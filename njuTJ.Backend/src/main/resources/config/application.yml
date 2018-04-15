@@ -18,7 +18,7 @@ oos:
   accessKey: c4582dec5d0809103126
   secretKey: 47c783687d4c452c5d71b817b8c481915fb0094a
   endPoint: http://oos-bj2.ctyunapi.cn
-  bucketName: njuTJEnvironment
+  bucketName: njutjenvironment
 aliyun:
   akId: LTAIfeJPa5mmsKhL
   akSecret: Dfz3Tj7Tyuojl84vSBHX7E9eluivj5

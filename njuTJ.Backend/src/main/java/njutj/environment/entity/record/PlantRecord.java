@@ -16,8 +16,12 @@ public class PlantRecord extends Record {
     public PlantRecord() {
     }
 
-    public PlantRecord(RecordState recordState, String imageUrl, String plantName) {
-        super(recordState, imageUrl);
+    public PlantRecord(String plantName) {
+        this.plantName = plantName;
+    }
+
+    public PlantRecord(RecordState recordState, String imageUrl, double lng, double lat, String plantName) {
+        super(recordState, imageUrl, lng, lat);
         this.plantName = plantName;
     }
 

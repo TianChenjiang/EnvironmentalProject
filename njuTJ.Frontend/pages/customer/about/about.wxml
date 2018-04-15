@@ -4,16 +4,16 @@
     <view class="page__hd">
     </view>
     <view style="text-align:center">
-      <text>这是一个大学生的创业项目</text>
+      <text>我们是南京大学天健社</text>
+      <text>这是我们的一个公益项目</text>
     </view>
   </view>
   <view class="page_bd" style="text-align:center">
     <view>联系方式：</view>
     <view>qq:445073309（张同学）</view>
-    <view>微信:Yuanxi_sun_301179（孙同学）</view>
   </view>
   <view class="footer">
     <view>Version:0.9.0</view>
-    <view>@ Powered By Surevil</view>
+    <view>@ Powered By njuTJ</view>
   </view>
 </view>
