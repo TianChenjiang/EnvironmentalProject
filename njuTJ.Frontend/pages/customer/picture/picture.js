@@ -128,7 +128,7 @@ Page({
             },
             success: function (res) {
               wx.showToast({
-                title: '添加成功',
+                title: res.data.name,
                 icon: 'success',
                 duration: 1000
               });
