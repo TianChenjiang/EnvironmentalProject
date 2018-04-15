@@ -13,12 +13,15 @@ public class Record {
     private long id;
     @Column(name = "recordState")
     private RecordState recordState;
+    @Column(name = "image")
+    private String imageUrl;
 
     public Record() {
     }
 
-    public Record(RecordState recordState) {
+    public Record(RecordState recordState, String imageUrl) {
         this.recordState = recordState;
+        this.imageUrl = imageUrl;
     }
 
     public long getId() {
@@ -35,5 +38,13 @@ public class Record {
 
     public void setRecordState(RecordState recordState) {
         this.recordState = recordState;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

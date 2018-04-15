@@ -1,15 +1,19 @@
 package njutj.environment.vo.record;
 
-public class SpeciesCheckVo {
+import njutj.environment.publicdatas.record.Position;
+
+public class RecordCreateVo {
     private long recordId;
     private String name;
+    private Position position;
 
-    public SpeciesCheckVo() {
+    public RecordCreateVo() {
     }
 
-    public SpeciesCheckVo(long recordId, String name) {
+    public RecordCreateVo(long recordId, String name, Position position) {
         this.recordId = recordId;
         this.name = name;
+        this.position = position;
     }
 
     public long getRecordId() {
@@ -26,5 +30,13 @@ public class SpeciesCheckVo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

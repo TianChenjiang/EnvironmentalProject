@@ -1,9 +1,12 @@
 package njutj.environment.bl.record;
 
 import njutj.environment.blservice.record.RecordBlService;
+import njutj.environment.dataservice.record.AliCheckDataService;
 import njutj.environment.dataservice.record.RecordDataService;
 import njutj.environment.entity.record.PlantRecord;
 import njutj.environment.publicdatas.record.RecordState;
+import njutj.environment.response.record.RecordCreateResponse;
+import njutj.environment.vo.record.RecordCreateVo;
 import njutj.environment.vo.record.SpeciesCheckVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +14,45 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecordBlServiceImpl implements RecordBlService {
     private final RecordDataService recordDataService;
+    private final AliCheckDataService aliCheckDataService;
 
     @Autowired
-    public RecordBlServiceImpl(RecordDataService recordDataService) {
+    public RecordBlServiceImpl(RecordDataService recordDataService, AliCheckDataService aliCheckDataService) {
         this.recordDataService = recordDataService;
+        this.aliCheckDataService = aliCheckDataService;
     }
 
+    /**
+     * save expert's check result
+     *
+     * @param speciesCheckVo
+     */
+    @Override
     public void check(SpeciesCheckVo speciesCheckVo) {
-        PlantRecord plantRecord = recordDataService.getRecordById(speciesCheckVo.getId());
-        PlantRecord.setState(RecordState.RECORDED);
-        PlantRecord.setName(name);
-        PlantRecord.setLng(lng);
-        PlantRecord.setLat(lat);
+        PlantRecord plantRecord = recordDataService.getRecordByRecordId(speciesCheckVo.getRecordId());
+        plantRecord.setPlantName(speciesCheckVo.getName());
+        plantRecord.setRecordState(RecordState.RECORDED);
         recordDataService.saveRecord(plantRecord);
+    }
+
+    /**
+     * create a record
+     *
+     * @param recordCreateVo
+     */
+    @Override
+    public RecordCreateResponse createRecord(RecordCreateVo recordCreateVo) {
+        PlantRecord plantRecord = recordDataService.getRecordByRecordId(recordCreateVo.getRecordId());
+        String name = aliCheckDataService.checkImage(plantRecord.getImageUrl());
+        if (name != null && name.length() > 0) {
+            plantRecord.setPlantName(name);
+            plantRecord.setRecordState(RecordState.RECORDED);
+            recordDataService.saveRecord(plantRecord);
+            return new RecordCreateResponse(plantRecord.getId(), plantRecord.getRecordState(), plantRecord.getPlantName());
+        } else {
+            plantRecord.setRecordState(RecordState.EXPERTING);
+            recordDataService.saveRecord(plantRecord);
+            return new RecordCreateResponse(plantRecord.getId(), plantRecord.getRecordState(), null);
+        }
     }
 }

@@ -13,8 +13,25 @@ public class RecordDataServiceImpl implements RecordDataService {
         this.plantRecordDao = plantRecordDao;
     }
 
+    /**
+     * save record
+     *
+     * @param plantRecord
+     * @return the plant record object
+     */
     @Override
     public PlantRecord saveRecord(PlantRecord plantRecord) {
         return plantRecordDao.save(plantRecord);
+    }
+
+    /**
+     * get record object by its id
+     *
+     * @param recordId
+     * @return the plant record object
+     */
+    @Override
+    public PlantRecord getRecordByRecordId(long recordId) {
+        return plantRecordDao.findPlantRecordById(recordId);
     }
 }

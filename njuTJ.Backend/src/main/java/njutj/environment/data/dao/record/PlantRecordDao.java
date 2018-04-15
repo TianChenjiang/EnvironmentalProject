@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface PlantRecordDao extends JpaRepository<PlantRecord, Integer> {
     List<PlantRecord> findPlantRecordsByRecordState(RecordState recordState);
+
+    PlantRecord findPlantRecordById(long id);
 }
