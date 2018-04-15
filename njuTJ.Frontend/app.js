@@ -10,8 +10,8 @@ App({
   },
   globalData: {
     hasLogin: false,
-    backendUrl: "http://localhost:8080/",
-    backendSupplierUrl: "http://localhost:8080/",
+    backendUrl: "http://139.199.222.72:8080/",
+    backendSupplierUrl: "http://139.199.222.72:8080/",
     PictureUrl:""
   }
 });
