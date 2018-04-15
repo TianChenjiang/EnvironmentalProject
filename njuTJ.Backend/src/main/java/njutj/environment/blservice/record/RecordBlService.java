@@ -1,5 +1,6 @@
 package njutj.environment.blservice.record;
 
+import njutj.environment.exception.viewexception.SystemException;
 import njutj.environment.response.record.RecordCreateResponse;
 import njutj.environment.response.record.WaitForCheckResponse;
 import njutj.environment.vo.record.RecordCreateVo;
@@ -18,7 +19,7 @@ public interface RecordBlService {
      *
      * @param recordCreateVo
      */
-    RecordCreateResponse createRecord(RecordCreateVo recordCreateVo);
+    RecordCreateResponse createRecord(RecordCreateVo recordCreateVo) throws SystemException;
 
     /**
      * load the data of records to be checked

@@ -4,6 +4,7 @@ import njutj.environment.blservice.record.RecordBlService;
 import njutj.environment.dataservice.record.AliCheckDataService;
 import njutj.environment.dataservice.record.RecordDataService;
 import njutj.environment.entity.record.PlantRecord;
+import njutj.environment.exception.viewexception.SystemException;
 import njutj.environment.publicdatas.record.RecordState;
 import njutj.environment.response.record.RecordCreateResponse;
 import njutj.environment.response.record.WaitForCheckItem;
@@ -46,7 +47,7 @@ public class RecordBlServiceImpl implements RecordBlService {
      * @param recordCreateVo
      */
     @Override
-    public RecordCreateResponse createRecord(RecordCreateVo recordCreateVo) {
+    public RecordCreateResponse createRecord(RecordCreateVo recordCreateVo) throws SystemException {
         PlantRecord plantRecord = recordDataService.getRecordByRecordId(recordCreateVo.getRecordId());
         String name = aliCheckDataService.checkImage(plantRecord.getImageUrl());
         if (name != null && name.length() > 0) {

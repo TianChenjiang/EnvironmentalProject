@@ -16,6 +16,11 @@ public class UserDataServiceImpl implements UserDataService {
         this.userDao = userDao;
     }
 
+    @Override
+    public boolean isUserExistent(String username) {
+        return userDao.findUserByUsername(username) != null;
+    }
+
     /**
      * save user
      *

@@ -37,4 +37,10 @@ public class UserController {
             return new ResponseEntity<>(e.getResponse(), HttpStatus.CONFLICT);
         }
     }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/getOpenId", produces = "application/json")
+    @ResponseBody
+    public String getOpenId(@RequestParam("jsCode") String jsCode) {
+        return userBlService.getOpenId(jsCode);
+    }
 }

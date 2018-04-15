@@ -2,11 +2,9 @@ package njutj.environment.entity.record;
 
 import njutj.environment.publicdatas.record.RecordState;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -68,7 +68,7 @@ public class ApiUtil {
     /*
      * 发送POST请求
      */
-    public static String sendPost(String url, String body, String ak_id, String ak_secret) throws Exception {
+    public static String sendPost(String url, String body, String ak_id, String ak_secret) throws IOException {
         PrintWriter out = null;
         BufferedReader in = null;
         String result = "";
@@ -141,7 +141,7 @@ public class ApiUtil {
     /*
      * GET请求
      */
-    public static String sendGet(String url, String ak_id, String ak_secret) throws Exception {
+    public static String sendGet(String url, String ak_id, String ak_secret) throws IOException {
         String result = "";
         BufferedReader in = null;
         int statusCode = 200;

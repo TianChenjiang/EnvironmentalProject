@@ -2,6 +2,7 @@ package njutj.environment.entity.account;
 
 import javax.persistence.*;
 
+@Entity
 @Table(name = "user")
 public class User {
 

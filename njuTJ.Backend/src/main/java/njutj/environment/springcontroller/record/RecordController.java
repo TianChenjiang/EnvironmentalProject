@@ -51,6 +51,11 @@ public class RecordController {
     @RequestMapping(method = RequestMethod.POST, path = "record/createRecord", produces = "application/json")
     @ResponseBody
     public ResponseEntity<Response> createRecord(@RequestBody RecordCreateVo recordCreateVo) {
-        return new ResponseEntity<>(recordBlService.createRecord(recordCreateVo), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(recordBlService.createRecord(recordCreateVo), HttpStatus.CREATED);
+        } catch (SystemException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

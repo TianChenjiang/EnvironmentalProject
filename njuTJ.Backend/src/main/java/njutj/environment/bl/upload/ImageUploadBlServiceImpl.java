@@ -8,10 +8,12 @@ import njutj.environment.exception.viewexception.SystemException;
 import njutj.environment.publicdatas.record.RecordState;
 import njutj.environment.response.upload.UploadImageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+@Service
 public class ImageUploadBlServiceImpl implements ImageUploadBlService {
     private final ImageUploadDataService imageUploadDataService;
     private final RecordDataService recordDataService;

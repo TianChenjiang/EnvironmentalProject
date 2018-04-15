@@ -3,8 +3,10 @@ package njutj.environment.entity.record;
 import njutj.environment.publicdatas.record.RecordState;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Entity
 @Table(name = "plantRecord")
 public class PlantRecord extends Record {
 

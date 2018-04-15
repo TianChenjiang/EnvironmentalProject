@@ -5,9 +5,11 @@ import njutj.environment.dataservice.record.RecordDataService;
 import njutj.environment.entity.record.PlantRecord;
 import njutj.environment.publicdatas.record.RecordState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RecordDataServiceImpl implements RecordDataService {
     private final PlantRecordDao plantRecordDao;
 
