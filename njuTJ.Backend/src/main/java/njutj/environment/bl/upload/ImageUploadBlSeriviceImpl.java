@@ -31,6 +31,8 @@ public class ImageUploadBlSeriviceImpl implements ImageUploadBlService {
     public UploadImageResponse uploadImage(MultipartFile multipartFile) throws IOException, SystemException {
         Image image = imageDataService.saveImage(new Image(""));
         String url = imageUploadDataService.uploadImage(image.getId() + "", multipartFile.getBytes());
+        image.setUrl(url);
+        imageDataService.saveImage(image);
         return new UploadImageResponse(url);
     }
 }
