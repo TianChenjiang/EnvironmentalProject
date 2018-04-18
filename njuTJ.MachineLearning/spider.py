@@ -1,13 +1,29 @@
 # -*- coding: UTF-8 -*-
 import json
 import random
-
+import io
+from urllib.request import urlopen
 import math
 
 import time
 
 import requests
+from PIL import Image
 from bs4 import BeautifulSoup
+import ssl
+
+if hasattr(ssl, '_create_unverified_context'):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+
+def resize(w, h, w_box, h_box, pil_image):
+    f1 = 1.0 * w_box / w  # 1.0 forces float division in Python2
+    f2 = 1.0 * h_box / h
+    factor = min([f1, f2])
+    width = int(w * factor)
+    height = int(h * factor)
+    return pil_image.resize((width, height), Image.LANCZOS)
+
 
 classification = ["cbzw", "mbzw", "tbzw", "qgzw", "sgzw", "lkzw", "sszw", "drzw"]
 user_agents = ['Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1',
@@ -33,7 +49,7 @@ while True:
     if not url_has_more[index]:
         isNotStopTime = False
         for i in range(classification_len):
-            isNotStopTime = isNotStopTime | url_has_more[index]
+            isNotStopTime = isNotStopTime | url_has_more[i]
         if not isNotStopTime:
             break
         continue
@@ -52,4 +68,12 @@ while True:
     if length == url_now_index[index]:
         url_page_index[index] += 1
         url_now_index[index] = 0
-    print(imageUrl)
+
+    w_box = 224
+    h_box = 224
+    image_bytes = urlopen(imageUrl).read()
+    data_stream = io.BytesIO(image_bytes)
+    pil_image = Image.open(data_stream)
+    w, h = pil_image.size
+    pil_image_resized = resize(w, h, w_box, h_box, pil_image)
+    print(pil_image_resized)
