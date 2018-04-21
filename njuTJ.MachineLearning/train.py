@@ -64,10 +64,21 @@ def get_next_batch():
         input_x = cv2.resize(input_x, (227, 227))
         input_x = input_x.astype(np.float32)
         input_x = np.reshape(input_x, [1, 227, 227, 3])
+        input_x = input_x / 255
         y = get_realY([index], 1)
         return [input_x, y]
     else:
         return get_next_batch()
+
+
+def get_batch(batch_size):
+    result_x = []
+    result_y = []
+    for i in range(batch_size):
+        X, Y = get_next_batch()
+        result_x.append(X)
+        result_y.append(Y)
+    return [result_x, result_y]
 
 
 def resize(w, h, w_box, h_box, pil_image):
@@ -150,6 +161,16 @@ def bias_variable(shape):
     return tf.Variable(initial)
 
 
+def save_models():
+    saver = tf.train.Saver()
+    saver.save(sess, "CNN_classification.ckpt")
+
+
+def load_models():
+    saver = tf.train.Saver()
+    saver.restore(sess, "CNN_classification.ckpt")
+
+
 input_x = tf.placeholder(tf.float32, [None, 227 * 227 * 3])
 input_x = tf.reshape(input_x, [-1, 227, 227, 3])
 real_y = tf.placeholder(tf.float32, [None, 8])
@@ -189,15 +210,24 @@ fc7 = fc(input=fc6, num_in=4096, num_out=4096, drop_ratio=1.0 - keep_prob, relu=
 # layer 8
 fc8 = fc(input=fc7, num_in=4096, num_out=num_classes, drop_ratio=0, relu=False)
 
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=real_y, logits=fc8))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=real_y, logits=fc8))
 optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
 
 correct_pred = tf.equal(tf.argmax(fc8, 1), tf.argmax(real_y, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+    accuracy_time = 0
     for step in range(iterator):
-        next_batch = get_next_batch()
+        next_batch = get_batch(5)
         sess.run(optimizer, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5})
         if step % 10 == 0:
+            correct = sess.run(accuracy, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5})
             print(sess.run(cost, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5}))
+            print(correct)
+            if correct == 1:
+                accuracy_time += 1
+            else:
+                accuracy_time = 0
+            if accuracy_time >= 10:
+                save_models()
