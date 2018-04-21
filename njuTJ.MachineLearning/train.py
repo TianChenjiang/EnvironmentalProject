@@ -45,33 +45,29 @@ def get_next_batch():
     headers = {
         'User-Agent': user_agents[agents_index]
     }
-    searchPage = url_page_index[index]
-    if not url_has_more[index]:
-        searchPage = random.randint(1, page_num[index])
+    searchPage = random.randint(1, 100)
     url = "https://tuku.huabaike.com/default.php/Pics/ajaxupload/" + str(math.floor(time.time())) + "?page=" + str(
         searchPage) + "&url=" + str(classification[index])
     res = requests.get(url=url, headers=headers)
     content = json.loads(res.content.decode('utf-8'))
     length = content['length']
-    if length == 0:
-        page_num[index] = url_page_index[index]
-    soupAll = BeautifulSoup(content['htmlstr'], "html.parser")
-    imageUrl = soupAll.find_all('a')[url_now_index[index]]['href']
-    url_now_index[index] += 1
-    if length == url_now_index[index]:
-        url_page_index[index] += 1
-        url_now_index[index] = 0
+    if length != 0:
+        index_num = random.randint(0, length - 1)
+        soupAll = BeautifulSoup(content['htmlstr'], "html.parser")
+        imageUrl = soupAll.find_all('a')[index_num]['href']
 
-    image_bytes = urlopen(imageUrl).read()
-    data_stream = io.BytesIO(image_bytes)
-    with open("temp.jpg", "wb") as file:
-        file.write(data_stream.read())
-    input_x = cv2.imread("temp.jpg")
-    input_x = cv2.resize(input_x, (227, 227))
-    input_x = input_x.astype(np.float32)
-    input_x = np.reshape(input_x, [1, 227, 227, 3])
-    y = get_realY([index], 1)
-    return [input_x, y]
+        image_bytes = urlopen(imageUrl).read()
+        data_stream = io.BytesIO(image_bytes)
+        with open("temp.jpg", "wb") as file:
+            file.write(data_stream.read())
+        input_x = cv2.imread("temp.jpg")
+        input_x = cv2.resize(input_x, (227, 227))
+        input_x = input_x.astype(np.float32)
+        input_x = np.reshape(input_x, [1, 227, 227, 3])
+        y = get_realY([index], 1)
+        return [input_x, y]
+    else:
+        return get_next_batch()
 
 
 def resize(w, h, w_box, h_box, pil_image):
@@ -204,4 +200,4 @@ with tf.Session() as sess:
         next_batch = get_next_batch()
         sess.run(optimizer, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5})
         if step % 10 == 0:
-            print(sess.run(accuracy, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5}))
+            print(sess.run(cost, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5}))
