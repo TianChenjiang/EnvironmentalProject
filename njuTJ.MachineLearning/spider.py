@@ -94,4 +94,4 @@ for (kind_url, kind_value) in kind_dict.items():
             imageUrl = demo.find_all("a")[0]["href"]
             image_bytes = urlopen(imageUrl).read()
             data_stream = io.BytesIO(image_bytes)
-            image_file.write(data_stream)
+            image_file.write(data_stream.read())
