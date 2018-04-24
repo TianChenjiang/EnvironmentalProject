@@ -21,10 +21,16 @@ iterator = 6000
 
 # 数据获取
 classification = os.listdir("resources")
+to_pop = []
+to_pop_time = 0
 for i in range(classification.__len__()):
     if classification[i][0] == ".":
-        classification.pop(i)
-        break
+        to_pop.append(i)
+    if classification[i][0] != "." and os.listdir("resources/" + classification[i]).__len__() < 15:
+        to_pop.append(i)
+for j in to_pop:
+    classification.pop(j - to_pop_time)
+    to_pop_time += 1
 classification_len = classification.__len__()
 
 
@@ -189,15 +195,11 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     accuracy_time = 0
     for step in range(iterator):
-        next_batch = get_batch(100)
+        next_batch = get_batch(50)
         sess.run(optimizer, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5})
         if step % 10 == 0:
-            correct = sess.run(accuracy, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5})
-            print(sess.run(cost, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 0.5}))
+            correct = sess.run(accuracy, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 1})
+            print(sess.run(cost, feed_dict={input_x: next_batch[0], real_y: next_batch[1], keep_prob: 1}))
             print(correct)
-            if correct == 1:
-                accuracy_time += 1
-            else:
-                accuracy_time = 0
-            if accuracy_time >= 10:
+            if correct >= 0.8:
                 save_models()
