@@ -20,19 +20,29 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "app",
 					"pathName": "pages/index/index",
 					"query": ""
-        }
+				},
+				{
+					"id": -1,
+					"name": "expert",
+					"pathName": "pages/customer/expert/expert",
+					"query": ""
+				}
 			]
 		}
 	}

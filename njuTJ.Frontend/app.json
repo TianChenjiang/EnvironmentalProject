@@ -1,25 +1,14 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/customer/picture/picture",
     "pages/customer/user/user",
-    "pages/customer/restaurant/menu/menu",
-    "pages/customer/restaurant/choose/choose",
-    "pages/customer/event/event",
-    "pages/customer/cart/cart",
     "pages/customer/about/about",
-    "pages/customer/order/order",
-    "pages/customer/orderPreview/orderPreview",
-    "pages/supplier/home/home",
-    "pages/supplier/addFood/addFood",
-    "pages/supplier/chooseFood/chooseFood",
-    "pages/supplier/receiveOrder/receiveOrder",
-    "pages/supplier/orderSetting/orderSetting",
-    "pages/supplier/manageFood/manageFood",
-    "pages/supplier/editFood/editFood"
+    "pages/customer/expert/expert"
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "S&C “校园+” 订餐",
+    "navigationBarTitleText": "NJUTJ",
     "navigationBarBackgroundColor": "#000000",
     "backgroundColor": "#f8f8f8"
   },
@@ -36,16 +25,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/customer/cart/cart",
-        "iconPath": "pages/customer/images/cart.png",
-        "selectedIconPath": "pages/customer/images/cart.png",
-        "text": "餐盘"
-      },
-      {
-        "pagePath": "pages/customer/orderPreview/orderPreview",
-        "iconPath": "pages/customer/images/form.png",
-        "selectedIconPath": "pages/customer/images/form.png",
-        "text": "订单"
+        "pagePath": "pages/customer/expert/expert",
+        "iconPath": "pages/customer/images/icon_nav_search.png",
+        "selectedIconPath": "pages/customer/images/icon_nav_search.png",
+        "text": "专家检验"
       },
       {
         "pagePath": "pages/customer/user/user",

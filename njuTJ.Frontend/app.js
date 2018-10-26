@@ -10,7 +10,8 @@ App({
   },
   globalData: {
     hasLogin: false,
-    backendUrl: "https://www.sandc.xyz/",
-    backendSupplierUrl: "https://www.sandc.xyz/"
+    backendUrl: "http://139.199.222.72:8080/",
+    backendSupplierUrl: "http://139.199.222.72:8080/",
+    PictureUrl:""
   }
 });

@@ -1,0 +1,15 @@
+<!--pages/picture/picture.wxml-->
+<view class="page">
+   <image bindload="imageLoad" src="{{tempFilePaths}}" mode="aspectFit" style="text-align:center"> </image>
+    <text>\n图片地址：{{tempFilePaths}}</text>
+     <text>纬度：{{Latitude}}\n</text>
+      <text>经度：{{Longitude}}\n</text>
+       <text>精确地址：{{Address}}</text>
+     <view class="page__bd page__bd_spacing">
+     <button bindtap="Back" type="primary" plain="true">重新拍摄</button>
+     <button bindtap="Upload" type="primary" plain="true">上传照片</button>
+     </view>
+    <view>
+    </view>
+    </view>
+    
